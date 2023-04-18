@@ -9,20 +9,13 @@ app.use(logger("dev"))
 
 app.use(cors());
 
-
-
-app.use("/", transactionController);
-app.use("/:id",transactionController);
-app.use
-
-
+app.use("/transactions", transactionController);
 
 app.get("/", (req, res) => {
   res.json({
     message: "Welcome to the budgeting app"
   });
 });
-
 
 
 app.get("*", (req, res) => {    

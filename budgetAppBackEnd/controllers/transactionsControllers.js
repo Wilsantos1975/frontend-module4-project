@@ -3,7 +3,7 @@ const transactions = express.Router();
 const transactionsArray = require("../models/transactions.js");
 
 //get all entries
-transactions.get("/transactions", (req, res) => {
+transactions.get("/", (req, res) => {
   res.json(transactionsArray);
 });
 
@@ -48,14 +48,5 @@ transactions.post("/", (req, res) => {
 });
 
 
-
-
-//    if(transactionsArray[id]) {
-//        transactionsArray.push(req.body)
-//        res.json(transactionsArray[id])
-//    } else {
-//        res.status(404).json({ error: "Not Found" });
-//    }
-// } )
 
 module.exports = transactions;
