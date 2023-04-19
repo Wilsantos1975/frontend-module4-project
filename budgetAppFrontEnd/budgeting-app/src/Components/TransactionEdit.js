@@ -1,10 +1,15 @@
 import axios from "axios";
 import { v4 } from "uuid";
 import { useState } from "react";
-
+import { useNavigate, useParams } from "react-router-dom";
 const API = process.env.REACT_APP_API_URL;
 
 function TransactionEdit({ transaction }) {
+
+
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   const [error, setError] = useState(false);
   const [transactionEdit, setTransactionEdit] = useState({
     id: v4(),
@@ -19,13 +24,15 @@ function TransactionEdit({ transaction }) {
     e.preventDefault();
     try {
       axios
-        .put(`${API}/transactions/${transaction.id}`, transactionEdit)
+        .put(`${API}/transactions/${id}`, transactionEdit)
         .then((res) => {
           console.log(res);
           console.log(res.data);
-        });
+        }) 
+        navigate(`/transactions/${id}`)
     } catch {
       setError(true);
+      console.log(error)
     }
   };
 
@@ -81,7 +88,7 @@ function TransactionEdit({ transaction }) {
           onChange={changeHandler}
         />
         <br></br>
-        <button type="submit">Submit</button>
+        <button type="submit" >Submit</button>
       </form>
     </div>
   );

@@ -25,6 +25,7 @@ function TransactionNew() {
       });
     } catch {
       setError(true);
+      console.log(error)
     }
   };
 
