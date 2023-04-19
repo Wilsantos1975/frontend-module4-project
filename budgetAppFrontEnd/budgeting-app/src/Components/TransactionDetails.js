@@ -29,7 +29,7 @@ useEffect(() => {
   return (
     <div>
       <h3>{transaction.date}</h3>
-      <h3>{transaction.category}</h3>
+      <h3>{transaction.item_name}</h3>
       <h3>{transaction.amount}</h3>
       <button onClick={() => navigate(`/transactions/${id}/edit`)}>Edit</button>
       <button onClick={() => navigate(`/transactions/${id}/delete`)}>Delete</button>

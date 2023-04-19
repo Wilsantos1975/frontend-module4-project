@@ -1,5 +1,6 @@
 import Home from "./Components/Home";
 import Nav from "./Components/Nav";
+import Transaction from "./Components/Transaction";
 import TransactionDetails from "./Components/TransactionDetails";
 import TransactionEdit from "./Components/TransactionEdit";
 import TransactionNew from "./Components/TransactionNew";
@@ -17,7 +18,7 @@ function App() {
         <Route path="/transactions" element={<TransactionIndex />} />
         <Route path="/transactions/new" element={<TransactionNew />} />
         <Route path="/transactions/:id" element={<TransactionDetails />} />
-        <Route path="/transactions/:id/edit" element={<TransactionEdit />} />
+        <Route path="/transactions/:id/edit" element={<TransactionEdit Transaction={Transaction}/>} />
       </Routes>
     </div>
   );

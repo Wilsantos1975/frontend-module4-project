@@ -7,8 +7,8 @@ function Transaction({transaction}) {
 
   return (
     <div className="transaction">
-      <h3>{transaction.name}</h3>
-      <Link to={`/transactions/${transaction.id}`}>{transaction.category}</Link>
+      <h3>{transaction.date}</h3>
+      <Link to={`/transactions/${transaction.id}`}>{transaction.item_name}</Link>
       <p>{transaction.amount}</p>
     </div>
   )
