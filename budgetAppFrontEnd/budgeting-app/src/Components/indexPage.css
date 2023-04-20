@@ -1,0 +1,81 @@
+.index h2 {
+    font-size: 1.5em;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    background: #000;
+    padding: 10px 0;
+}
+
+.transaction {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.date {
+    font-size: 0.8em;
+    font-weight: 300px;
+    margin:  0 10px;
+    padding: auto;
+    
+ 
+   
+    
+}
+.transaction h3 {
+    margin: 0;
+}
+
+.transaction-link {
+    text-decoration: none;
+    color: #000;
+}
+.amount {
+    
+    font-weight: bold;
+    margin:  0 10px;
+    
+}
+.transaction-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: 0 auto; */
+
+    
+}
+
+.transaction-buttons button {
+    margin: 0 10px;
+}
+
+.edit{
+    background-color: blue;
+    color:white;
+    font-weight: bold;
+}
+.delete{
+    color:white;
+    font-weight: bold;
+    background-color: red;
+    margin-left:20px
+}
+.edit:hover{
+background-color: teal;
+cursor:pointer;
+}
+.delete:hover{
+    background-color: crimson;
+    cursor:pointer;
+}

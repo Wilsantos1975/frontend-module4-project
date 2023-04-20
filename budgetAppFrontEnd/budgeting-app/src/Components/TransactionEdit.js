@@ -1,5 +1,5 @@
 import axios from "axios";
-import { v4 } from "uuid";
+
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 const API = process.env.REACT_APP_API_URL;
@@ -12,7 +12,7 @@ function TransactionEdit({ transaction }) {
 
   const [error, setError] = useState(false);
   const [transactionEdit, setTransactionEdit] = useState({
-    id: v4(),
+    id: '',
     item_name: "",
     amount: "",
     date: "",

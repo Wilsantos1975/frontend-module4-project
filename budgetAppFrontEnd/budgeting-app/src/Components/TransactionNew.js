@@ -1,10 +1,14 @@
 import axios from "axios";
 import { v4 } from "uuid";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./transactionForm.css"
 
 const API = process.env.REACT_APP_API_URL;
 
 function TransactionNew() {
+  const navigate = useNavigate();
+
   const [error, setError] = useState(false);
   const [newTransaction, setNewTransaction] = useState({
     id: v4(),
@@ -19,13 +23,14 @@ function TransactionNew() {
     e.preventDefault();
 
     try {
-      axios.post(`${API}/transactions`, newTransaction).then((res) => {
+      axios.post(`${API}/transactions/new`, newTransaction).then((res) => {
         console.log(res);
         console.log(res.data);
       });
+      navigate(`/${newTransaction.id}`, { state:  newTransaction  });
     } catch {
       setError(true);
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -33,11 +38,11 @@ function TransactionNew() {
     setNewTransaction({ ...newTransaction, [e.target.name]: e.target.value });
   };
 
-
   return (
     <div>
+      <h2 className="sub-title">New Transaction</h2>
       <form onSubmit={submitHandler}>
-      <label htmlFor="date">Date</label>
+        <label htmlFor="date">Date</label>
         <input
           type="text"
           id="date"
@@ -46,7 +51,7 @@ function TransactionNew() {
           onChange={changeHandler}
         />
         <br></br>
-        <label htmlFor="item_name">Item Name</label>
+        <label htmlFor="item_name">Name</label>
         <input
           type="text"
           id="item_name"
@@ -82,7 +87,8 @@ function TransactionNew() {
           onChange={changeHandler}
         />
         <br></br>
-        <button type="submit">Submit</button> 
+        <button className="btn-cancel" onClick={() => navigate("/")}>Cancel Transaction</button>
+        <button type="submit" className="btn-submit" onClick={submitHandler}>Create Transaction</button>
       </form>
     </div>
   );

@@ -1,29 +1,15 @@
-import { useState, useEffect } from "react";
+
 import Transaction from "./Transaction";
-import axios from "axios";
+import "./indexPage.css"
 
-const API = process.env.REACT_APP_API_URL;
 
-function TransactionIndex() {
-  const [transactions, setTransactions] = useState([]);
 
-  useEffect(() => {
-    const fetchTransactions = async () => {
-      try {
-        const res = await axios.get(`${API}/transactions`);
-        setTransactions(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchTransactions();
-  }, []);
-
+function TransactionIndex({ transactionsArray , handleDelete }) {
   return (
-
-    <div>
-      {transactions.map((transaction) => (
-          <Transaction key={transaction.id} transaction={transaction} />
+    <div className="index">
+      <h2>Transactions to date</h2>
+      {transactionsArray.map((transaction) => (
+        <Transaction key={transaction.id} transaction={transaction}  handleDelete={handleDelete}/>
       ))}
     </div>
   );

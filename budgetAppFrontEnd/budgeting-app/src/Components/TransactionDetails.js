@@ -1,41 +1,54 @@
-import axios from "axios";
+// import axios from "axios";
 import { useEffect, useState } from "react";
-import {  useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 
-const API = process.env.REACT_APP_API_URL;
+// const API = process.env.REACT_APP_API_URL;
 
+function TransactionDetails({ transactionsArray, handleDelete }) {
+  const location = useLocation();
+  let navigate = useNavigate();
+console.log(transactionsArray)
+  const [transactions, setTransactions] = useState(location.state ? location.state : {});
+  const { id } = useParams();
 
-function TransactionDetails() {
-let navigate = useNavigate();
+  // useEffect(() => {
+  //   axios
+  //   .get(`${API}/transactions/${id}`)
+  //   .then((res) => {
+  //     setTransactions(res.data);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     navigate("/404");
+  //   });
+  // }, [id, navigate]);
 
-const [transaction, setTransaction] = useState({});
+  useEffect(() => {
+    if (!location.state) {
+      const current = transactionsArray.filter((t) => t.id === id)[0]
 
-const { id } = useParams();
+      if (current) {
+        setTransactions(current)
+      } else {
+        navigate("/404")
+      }
+    }
+  }, [id, navigate, location.state, transactionsArray]);
 
-useEffect(() => {
-  axios
-  .get(`${API}/transactions/${id}`)
-  .then((res) => {
-    setTransaction(res.data);
-  })
-  .catch((err) => {
-    console.log(err);
-    navigate("/404");
-  });
-}, [id, navigate]);
-
-
+  const handleEdit = () => {
+    navigate(`/edit/${transactions.id}`);
+  };
 
   return (
     <div>
-      <h3>{transaction.date}</h3>
-      <h3>{transaction.item_name}</h3>
-      <h3>{transaction.amount}</h3>
-      <button onClick={() => navigate(`/transactions/${id}/edit`)}>Edit</button>
-      <button onClick={() => navigate(`/transactions/${id}/delete`)}>Delete</button>
-      <button onClick={() => navigate(`/transactions`)}>Back</button>
+      <h3>{transactions.date}</h3>
+      <h3>{transactions.item_name}</h3>
+      <h3>{transactions.amount}</h3>
+      <button onClick={handleEdit}>Edit</button>
+      <button onClick={() => handleDelete(transactions.id)}>Delete</button>
+      <button onClick={() => navigate(`/`)}>Back</button>
     </div>
-  )
+  );
 }
 
-export default TransactionDetails
+export default TransactionDetails;
