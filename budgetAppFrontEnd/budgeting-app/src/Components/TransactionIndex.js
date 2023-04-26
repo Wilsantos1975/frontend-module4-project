@@ -1,15 +1,16 @@
-
 import Transaction from "./Transaction";
-import "./indexPage.css"
+import "./indexPage.css";
 
-
-
-function TransactionIndex({ transactionsArray , handleDelete }) {
+function TransactionIndex({ transactionsArray, handleDelete }) {
   return (
     <div className="index">
       <h2>Transactions to date</h2>
       {transactionsArray.map((transaction) => (
-        <Transaction key={transaction.id} transaction={transaction}  handleDelete={handleDelete}/>
+        <Transaction
+          key={transaction.id}
+          transaction={transaction}
+          handleDelete={handleDelete}
+        />
       ))}
     </div>
   );

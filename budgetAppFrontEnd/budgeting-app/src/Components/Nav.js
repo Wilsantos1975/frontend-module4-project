@@ -3,7 +3,7 @@ import "./Nav.css"
 
 
 
-function Nav() {
+function Nav({total}) {
 
   const navigate = useNavigate();
 
@@ -13,7 +13,7 @@ function Nav() {
       <br></br>
       {/* <Link to="/transactions/new" onClick={() => navigate('/new')}>New Transaction</Link> */}
       <button className="btn-new"  onClick={() => navigate('/new')}>New Transaction</button>
-<h2>Account Total:$</h2>
+<h2>Account Total: ${total}</h2>
     </nav>
   )
 }

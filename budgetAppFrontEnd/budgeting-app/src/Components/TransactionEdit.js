@@ -1,10 +1,10 @@
 import axios from "axios";
 
-import { useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 const API = process.env.REACT_APP_API_URL;
 
-function TransactionEdit({ transaction }) {
+function TransactionEdit({ transactionsArray }) {
 
 
   const { id } = useParams();
@@ -20,16 +20,36 @@ function TransactionEdit({ transaction }) {
     from: "",
   });
 
+const selectedTransaction = useMemo(() => {
+  const transaction = transactionsArray.find((transaction) => transaction.id === id);
+  if (transaction) {
+    transaction.date = transaction.date.split('T')[0]; // remove time from date
+  } 
+  return transaction;
+}, [transactionsArray, id]);
+
+useEffect(() => {
+  
+    setTransactionEdit(selectedTransaction);
+  
+}, [selectedTransaction]);
+
+
+
+
+
+
+
   const submitHandler = (e) => {
     e.preventDefault();
     try {
       axios
-        .put(`${API}/transactions/${id}`, transactionEdit)
+        .put(`${API}/transactions/${id}/edit`, transactionEdit)
         .then((res) => {
           console.log(res);
           console.log(res.data);
         }) 
-        navigate(`/transactions/${id}`)
+        navigate(`/${id}`)
     } catch {
       setError(true);
       console.log(error)

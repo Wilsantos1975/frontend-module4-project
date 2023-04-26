@@ -17,6 +17,7 @@ function App() {
   const location = useLocation();
 
   const [transactionsArray, setTransactionsArray] = useState([]);
+  const [total, setTotal] = useState();
 
   useEffect(() => {
     axios.get(`${API}/transactions`).then((res) => {
@@ -24,14 +25,18 @@ function App() {
     });
   }, [location]);
 
+  useEffect(() => {
+    const total = transactionsArray.reduce((acc, transaction) => acc + parseFloat(transaction.amount), 0);
+    setTotal(parseFloat(total.toFixed(2)));
+  }, [transactionsArray]);
+
   const handleDelete = (id) => {
-    axios.delete(`${API}/transactions/${id}/delete`);
-    navigate("/");
+    axios.delete(`${API}/transactions/${id}/delete`).then(navigate("/"));
   };
 
   return (
     <div className="App">
-      <Nav />
+      <Nav total={total}/>
       <Routes>
         {/* <Route path="/" element={<Home />} /> */}
         <Route
